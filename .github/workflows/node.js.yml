@@ -35,6 +35,7 @@ jobs:
 
       - name: Deploy to Ubuntu
         run: |
+        needs: build
           cd /home/ubuntu/node.js/node.js_backend
           git pull origin master  # Pull the latest code from the 'main' branch
           npm install           # Install any new dependencies
