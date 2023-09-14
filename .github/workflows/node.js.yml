@@ -34,6 +34,7 @@ jobs:
         env:
           IP_ADDRESS: ${{ secrets.PRIVATE_IP }}
       - name: Deploy to Ubuntu
+        run:  |
           script: |
             cd /home/ubuntu/node.js
             git pull origin master  # Pull the latest code
