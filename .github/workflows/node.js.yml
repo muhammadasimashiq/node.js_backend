@@ -24,12 +24,16 @@ jobs:
       - name: Build and test your app (if needed)
         run: npm run build
 
+     
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan $43.207.145.189 >> ~/.ssh/known_hosts
+        env:
+          IP_ADDRESS: ${{ secrets.PRIVATE_IP }}
       - name: Deploy to Ubuntu
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ env.43.207.145.189 }}  # Use an environment variable for the server's IP
-          username: ${{ secrets.ubuntu }}
-          key: ${{ secrets.PRIVATE_KEY }}
           script: |
             cd /home/ubuntu/node.js
             git pull origin master  # Pull the latest code
