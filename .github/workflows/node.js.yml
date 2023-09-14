@@ -3,7 +3,7 @@ name: Deploy to Ubuntu Server
 on:
   push:
     branches:
-      - master  # Change this to your main branch name
+      - master  # Change this to your main branch 
 
 jobs:
   deploy:
