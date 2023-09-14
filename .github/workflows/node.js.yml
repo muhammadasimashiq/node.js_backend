@@ -27,11 +27,11 @@ jobs:
       - name: Deploy to Ubuntu
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.43.207.145.189 }}
+          host: ${{ env.43.207.145.189 }}  # Use an environment variable for the server's IP
           username: ${{ secrets.ubuntu }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
             cd /home/ubuntu/node.js
             git pull origin master  # Pull the latest code
-            npm install          # Install any new dependencies
-            pm2 start app.js     # Start your Node.js app with PM2
+            npm install            # Install any new dependencies
+            pm2 start app.js       # Start your Node.js app with PM2
