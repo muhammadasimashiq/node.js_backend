@@ -24,19 +24,18 @@ jobs:
       - name: Build and test your app (if needed)
         run: npm run build
 
-     
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
           echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan $43.207.145.189 >> ~/.ssh/known_hosts
+          ssh-keyscan 43.207.145.189 >> ~/.ssh/known_hosts
         env:
-          IP_ADDRESS: ${{ secrets.PRIVATE_IP }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+
       - name: Deploy to Ubuntu
-        run:  |
-          script: |
-            cd /home/ubuntu/node.js
-            git pull origin master  # Pull the latest code
-            npm install            # Install any new dependencies
-            pm2 start app.js       # Start your Node.js app with PM2
+        run: |
+          cd /home/ubuntu/node.js
+          git pull origin main  # Pull the latest code from the 'main' branch
+          npm install           # Install any new dependencies
+          pm2 start app.js      # Start your Node.js app with PM2
