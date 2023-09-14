@@ -36,6 +36,6 @@ jobs:
       - name: Deploy to Ubuntu
         run: |
           cd /home/ubuntu/node.js
-          git pull origin main  # Pull the latest code from the 'main' branch
+          git pull origin master  # Pull the latest code from the 'main' branch
           npm install           # Install any new dependencies
           pm2 start app.js      # Start your Node.js app with PM2
