@@ -3,7 +3,7 @@ name: Deploy to Ubuntu Server
 on:
   push:
     branches:
-      - master  # Change this to your main branch 
+      - master
 
 jobs:
   deploy:
@@ -16,13 +16,10 @@ jobs:
       - name: Install Node.js and npm
         uses: actions/setup-node@v2
         with:
-          node-version: 14  # Change to your desired Node.js version
+          node-version: 14  # Adjust to your Node.js version
 
       - name: Install dependencies
         run: npm install
-
-      - name: Build and test your app (if needed)
-        run: npm run build
 
       - name: Set up SSH
         run: |
@@ -35,8 +32,4 @@ jobs:
 
       - name: Deploy to Ubuntu
         run: |
-        needs: build
-          cd /home/ubuntu/node.js/node.js_backend
-          git pull origin master  # Pull the latest code from the 'main' branch
-          npm install           # Install any new dependencies
-          pm2 start app.js      # Start your Node.js app with PM2
+          ssh ubuntu@43.207.145.189 'cd /home/ubuntu/node.js/node.js_backend && git pull origin master && npm install && pm2 restart app.js'
